@@ -7,10 +7,13 @@
 
         public function index(){
             // $this->view('Hello'); // cool that works.
-            
+            $data = [
+                'title' => 'Welcome!'
+            ];
+            $this->view('pages/index', $data);
         }
 
-        public function about($id){
-            echo $id;
+        public function about(){
+            $this->view('pages/about');
         }
     }
