@@ -1,0 +1,44 @@
+PHP Data Objects
+
+consistent lean way to access database
+
+dsn - database source name. host + name
+<?php
+    $host = 'localhost';
+    $user = 'root';
+    $password = '123456';
+    $dbname = 'pdotest';
+
+    //sent DSN
+    $dsn = 'mysql:host=' . $host . ';dbname=' . $dbname;
+
+    //create PDO instance
+    $pdo = new PDO($dsn, $user, $password);
+
+    $status = 'admin
+
+
+    // bear in mind a statement like sql = 'SELECT * FROM users WHERE status = $status'; is UNSAFE
+    direct interpolation of user input allows sql injection attacks
+    $sql = 'SELECT * FROM users WHERE status = :status';
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute(['status => $status]);
+    $users = $stmt->fetchAll(); // fetchAll gets all results
+    $users = $stmt->fetchAll(PDO::FETCH_OBJ); //same thing but creates return row objects instead of key values
+    //set default fetchAll mode to object with $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
+
+    foreach($users as $user){
+        echo $user['name'].'<br>';]
+        echo $user->name.'<br>';
+    }
+
+    $name = 'Kevin Farthing';
+    $email = 'kf.fake@gmail.com';
+    $status = 'guest';
+
+    $sql 'INSERT INTO users(name,email,status) VALUES
+    (:name, :email, :status)';
+
+    $stmt = pdo->prepare($sql);
+    $stmt->execute(['name'=> $name, 'email'=>$email, 'status'=>$status]);
